@@ -18,11 +18,11 @@ const Deck = Styled.View`
 export default class DeckItem extends React.Component {
     static navigationOptions = {
         header: null,
-    }
+    };
 
     static propTypes = {
         deck: PropTypes.object.isRequired
-    }
+    };
 
     render() {
         const {title, id} = this.props.deck

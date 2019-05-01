@@ -10,27 +10,27 @@ import CardList from '../components/card-list'
 export default class AddDeckScreen extends React.Component {
     static navigationOptions = {
         header: null
-    }
+    };
 
     state = {
         cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}]
-    }
+    };
 
     inputChange = e => {
 
-    }
+    };
 
     deleteCard = key => {
         this.setState(state => ({
             cards: state.cards.filter(card => card.key !== key)
         }))
-    }
+    };
 
     addCard = () => {
         this.setState(state => ({
             cards: [...state.cards, {key: generateID(), title: '', answer: ''}]
         }))
-    }
+    };
 
     editCard = (index, key, value) => {
         this.setState(state => {
@@ -38,14 +38,14 @@ export default class AddDeckScreen extends React.Component {
                 cards: state.cards.map((card, i) => i === index ? {...card, [key]: value} : card)
             })
         })
-    }
+    };
 
     render() {
         const cardFunctions = {
             deleteCard: this.deleteCard,
             addCard: this.addCard,
             editCard: this.editCard
-        }
+        };
 
         return (
             <ScreenContainer centerHorizontal>
