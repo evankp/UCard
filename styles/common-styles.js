@@ -37,7 +37,6 @@ const StyledButton = Styled.TouchableOpacity`
                     border-style: solid;
                     border-color: ${props.color};
                     background-color: ${props.color};
-                    width: 18%;
                     align-items: center;
                 `;
             case 'secondary':
@@ -105,15 +104,17 @@ const StyledTextInput = Styled.TextInput`
 
 export class TextInput extends React.Component {
     state = {
-        focusStyling: {}
+        focusStyling: {
+            ...this.props.style
+        }
     };
 
     onFocus = () => {
-        this.setState({focusStyling: {borderBottomColor: colors.secondary.regular, borderBottomWidth: 2}})
+        this.setState({focusStyling: {borderBottomColor: colors.secondary.regular, borderBottomWidth: 2, ...this.props.style}})
     };
 
     onBlur = () => {
-        this.setState({focusStyling: {borderBottomColor: 'black', borderBottomWidth: 1}})
+        this.setState({focusStyling: {borderBottomColor: 'black', borderBottomWidth: 1, ...this.props.style}})
     };
 
     render() {

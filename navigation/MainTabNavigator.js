@@ -11,7 +11,7 @@ import Colors from '../constants/Colors'
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
-})
+});
 
 HomeStack.navigationOptions = {
     tabBarLabel: 'Deck list',
@@ -25,11 +25,11 @@ HomeStack.navigationOptions = {
             }
         />
     ),
-}
+};
 
 const AddDeckStack = createStackNavigator({
     Add: AddDeckScreen
-})
+});
 
 AddDeckStack.navigationOptions = {
     tabBarLabel: 'Add Deck',
@@ -46,14 +46,14 @@ AddDeckStack.navigationOptions = {
 
         />
     ),
-}
+};
 
 let tabNavigator
 
 const screens = {
-    AddDeckStack,
     HomeStack,
-}
+    AddDeckStack,
+};
 
 const options = {
     tabBarOptions: {
@@ -61,7 +61,7 @@ const options = {
             backgroundColor: colors.main.regular
         }
     }
-}
+};
 
 if (Platform.OS === 'ios') {
     tabNavigator = createBottomTabNavigator(screens, options)

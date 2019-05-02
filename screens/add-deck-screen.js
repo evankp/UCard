@@ -1,23 +1,24 @@
 import React from 'react'
-import {Text, TouchableOpacity, Platform, Modal} from 'react-native'
-import {Icon} from 'expo'
 import {ScreenContainer, Heading, TextInput, CardBox, Button} from '../styles/common-styles'
 
 import * as colors from '../utils/colors'
 import {generateID} from '../utils/helpers'
 import CardList from '../components/card-list'
+import {addDeck, clearStorage} from "../utils/async-storage";
 
 export default class AddDeckScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
 
+    // componentDidMount() {
+    //     clearStorage()
+    // }
+
     state = {
-        cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}]
-    };
-
-    inputChange = e => {
-
+        id: generateID(),
+        cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}],
+        title: ''
     };
 
     deleteCard = key => {
@@ -40,6 +41,16 @@ export default class AddDeckScreen extends React.Component {
         })
     };
 
+    submitDeck = () => {
+        addDeck(this.state);
+        this.setState({
+            id: generateID(),
+            cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}],
+            title: ''
+        });
+        this.props.navigation.navigate('Home', {refresh: true})
+    };
+
     render() {
         const cardFunctions = {
             deleteCard: this.deleteCard,
@@ -52,16 +63,22 @@ export default class AddDeckScreen extends React.Component {
                 <CardBox>
                     <Heading type="h2">Deck Info</Heading>
                     <TextInput placeholder="Deck title, subject, etc."
-                               onChangeText={this.inputChange}
+                               value={this.state.title}
+                               onChangeText={value => this.setState(() => ({
+                                   title: value
+                               }))}
+                               style={{marginBottom: 20}}
                     />
+                    <Button onPress={() => this.addCard()}
+                            type="tertiary"
+                            color={colors.main.regular}>
+                        Add Card
+                    </Button>
                 </CardBox>
 
                 <CardList cards={this.state.cards} {...cardFunctions}/>
-
-                <Button onPress={() => this.addCard()}
-                        type="secondary"
-                        color={colors.main.regular}>
-                    Add Card
+                <Button onPress={this.submitDeck} type="primary" color={colors.main.regular}>
+                    Add Deck
                 </Button>
             </ScreenContainer>
         )

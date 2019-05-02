@@ -17,7 +17,11 @@ export async function getDeckList() {
 }
 
 export function addDeck(deck) {
-    AsyncStorage.mergeItem(DECK_KEY, JSON.stringify(deck))
+    getDeckList()
+        .then(data => !data
+            ? AsyncStorage.setItem(DECK_KEY, JSON.stringify([deck]))
+            : AsyncStorage.setItem(DECK_KEY, JSON.stringify([...data, deck]))
+                .catch(err => console.log(err)))
         .catch(err => console.log(err))
 }
 

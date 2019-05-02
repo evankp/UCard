@@ -25,8 +25,8 @@ export default class DeckItem extends React.Component {
     };
 
     render() {
-        const {title, id} = this.props.deck
-        const numCards = this.props.deck.cards.length
+        const {title, id} = this.props.deck;
+        const numCards = this.props.deck.cards.length;
 
         return (
             <WithTouchable onPress={() => console.log(`${id} deck pressed!`)}>
