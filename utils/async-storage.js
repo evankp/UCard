@@ -19,8 +19,8 @@ export async function getDeckList() {
 export function addDeck(deck) {
     getDeckList()
         .then(data => !data
-            ? AsyncStorage.setItem(DECK_KEY, JSON.stringify([deck]))
-            : AsyncStorage.setItem(DECK_KEY, JSON.stringify([...data, deck]))
+            ? AsyncStorage.setItem(DECK_KEY, JSON.stringify({[deck.id]: deck}))
+            : AsyncStorage.setItem(DECK_KEY, JSON.stringify({...data, [deck.id]: deck}))
                 .catch(err => console.log(err)))
         .catch(err => console.log(err))
 }

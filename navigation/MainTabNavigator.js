@@ -8,6 +8,7 @@ import TabBarIcon from '../components/TabBarIcon'
 import HomeScreen from '../screens/home-screen'
 import AddDeckScreen from '../screens/add-deck-screen'
 import Colors from '../constants/Colors'
+import DeckScreen from "../screens/deck-screen";
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,
@@ -48,7 +49,7 @@ AddDeckStack.navigationOptions = {
     ),
 };
 
-let tabNavigator
+let tabNavigator;
 
 const screens = {
     HomeStack,

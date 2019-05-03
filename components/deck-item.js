@@ -13,13 +13,9 @@ const Deck = Styled.View`
     align-items: center;
     background-color: ${colors.white}
     margin-bottom: 10px;
-`
+`;
 
 export default class DeckItem extends React.Component {
-    static navigationOptions = {
-        header: null,
-    };
-
     static propTypes = {
         deck: PropTypes.object.isRequired
     };
@@ -29,7 +25,7 @@ export default class DeckItem extends React.Component {
         const numCards = this.props.deck.cards.length;
 
         return (
-            <WithTouchable onPress={() => console.log(`${id} deck pressed!`)}>
+            <WithTouchable onPress={() => this.props.navigate('Deck', {id, title})}>
                 <Deck>
                     <Heading type='h3'>{title}</Heading>
                     <Heading>{numCards} Cards</Heading>

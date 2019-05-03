@@ -3,11 +3,11 @@ import {Text} from "react-native";
 import {ScreenContainer} from '../styles/common-styles'
 import Styled from 'styled-components/native'
 import DeckItem from '../components/deck-item'
-import {getDeckList} from '../utils/async-storage'
+import {clearStorage, getDeckList} from '../utils/async-storage'
 
 const DeckList = Styled.FlatList`
     width: 100%
-`
+`;
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
@@ -41,7 +41,7 @@ export default class HomeScreen extends React.Component {
                     <DeckList
                         data={this.state.decks}
                         keyExtractor={(item) => item.id}
-                        renderItem={({item}) => <DeckItem deck={item}/>}
+                        renderItem={({item}) => <DeckItem deck={item} navigate={this.props.navigation.navigate}/>}
                     />
                 )}
 
