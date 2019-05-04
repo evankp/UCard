@@ -15,7 +15,7 @@ const AppContainer = createAppContainer(createStackNavigator({
     Deck: {
         screen: DeckScreen,
         navigationOptions: ({navigation}) => ({
-            title: `Deck: ${navigation.getParam('title', 'Undefined')}`,
+            title: `Deck Info`,
         })
     }
 }, {

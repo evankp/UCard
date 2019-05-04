@@ -12,6 +12,7 @@ export const secondary = {
 
 export const white = '#fff';
 export const lightGrey = '#eaeaea';
+export const grey = '#ababab';
 export const metaText = '#b1b1b1';
 
 export const negative = '#ff836d';

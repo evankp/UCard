@@ -3,7 +3,7 @@ import {AsyncStorage} from 'react-native'
 const DECK_KEY = 'UCard:deck';
 
 export function getDeck(id) {
-    AsyncStorage.getItem(DECK_KEY)
+    return AsyncStorage.getItem(DECK_KEY)
         .then(res => {
             const data = JSON.parse(res);
 

@@ -38,6 +38,7 @@ const StyledButton = Styled.TouchableOpacity`
                     border-color: ${props.color};
                     background-color: ${props.color};
                     align-items: center;
+                    margin: 5px;
                 `;
             case 'secondary':
                 return `
@@ -47,18 +48,18 @@ const StyledButton = Styled.TouchableOpacity`
                     border-width: 2;
                     border-style: solid;
                     border-color: ${props.color};
-                    width: 25%;
                     align-items: center;
+                    margin: 5px;
                 `
         }
     }}
 `;
 
 export const Button = (props) => {
-    const {onPress, type, color, children} = props;
+    const {onPress, type, color, children, style} = props;
 
     return (
-        <StyledButton color={color} type={type} onPress={onPress}>
+        <StyledButton color={color} type={type} onPress={onPress} style={style}>
             <Text style={{color: type === 'primary' ? '#fff' : color}}>{children}</Text>
         </StyledButton>
     )
@@ -67,8 +68,8 @@ export const Button = (props) => {
 Button.propTypes = {
     onPress: PropTypes.func.isRequired,
     type: PropTypes.oneOf(['primary', 'secondary', 'tertiary']),
-    color: PropTypes.string
-
+    color: PropTypes.string,
+    style: PropTypes.object
 };
 
 
