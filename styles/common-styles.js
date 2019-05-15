@@ -104,6 +104,17 @@ const StyledTextInput = Styled.TextInput`
 `;
 
 export class TextInput extends React.Component {
+    static propTypes = {
+        placeholder: PropTypes.string,
+        value: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+            PropTypes.bool
+        ]),
+        onChangeText: PropTypes.func.isRequired,
+        style: PropTypes.object
+    };
+
     state = {
         focusStyling: {
             ...this.props.style

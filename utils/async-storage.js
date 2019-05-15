@@ -17,12 +17,26 @@ export async function getDeckList() {
 }
 
 export function addDeck(deck) {
-    getDeckList()
+    return getDeckList()
         .then(data => !data
             ? AsyncStorage.setItem(DECK_KEY, JSON.stringify({[deck.id]: deck}))
-            : AsyncStorage.setItem(DECK_KEY, JSON.stringify({...data, [deck.id]: deck}))
-                .catch(err => console.log(err)))
-        .catch(err => console.log(err))
+            : AsyncStorage.setItem(DECK_KEY, JSON.stringify({...data, [deck.id]: deck})))
+}
+
+export function modifyDeck(deck) {
+    return getDeckList()
+        .then(data => AsyncStorage.setItem(DECK_KEY, JSON.stringify({...data, [deck.id]: deck})))
+}
+
+export function deleteDeck(id) {
+    return getDeckList()
+        .then(data => {
+            if (data) {
+                delete data[id];
+
+                AsyncStorage.setItem(DECK_KEY, JSON.stringify(data))
+            }
+        })
 }
 
 export async function clearStorage() {

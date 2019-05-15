@@ -1,19 +1,17 @@
 import React from 'react'
 import {ScreenContainer, Heading, TextInput, CardBox, Button} from '../styles/common-styles'
+import {connect} from 'react-redux'
 
 import * as colors from '../utils/colors'
 import {generateID} from '../utils/helpers'
 import CardList from '../components/card-list'
 import {addDeck, clearStorage} from "../utils/async-storage";
+import {submitDeck} from "../redux/actions";
 
-export default class AddDeckScreen extends React.Component {
+class AddDeckScreen extends React.Component {
     static navigationOptions = {
         header: null
     };
-
-    // componentDidMount() {
-    //     clearStorage()
-    // }
 
     state = {
         id: generateID(),
@@ -42,13 +40,18 @@ export default class AddDeckScreen extends React.Component {
     };
 
     submitDeck = () => {
-        addDeck(this.state);
+        // Add deck to store
+        this.props.dispatch(submitDeck(this.state));
+
+        // Reset screen to get ready for another deck to be added if needed
         this.setState({
             id: generateID(),
             cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}],
             title: ''
         });
-        this.props.navigation.navigate('Home', {refresh: true})
+
+        // Navigate to home screen
+        this.props.navigation.navigate('Home', {refresh: false})
     };
 
     render() {
@@ -84,3 +87,5 @@ export default class AddDeckScreen extends React.Component {
         )
     }
 }
+
+export default connect()(AddDeckScreen)
