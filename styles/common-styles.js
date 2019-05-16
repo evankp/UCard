@@ -25,41 +25,52 @@ export const ScreenContainer = Styled.View`
     background-color: ${colors.lightGrey};
 `;
 
+ScreenContainer.propTypes = {
+    centerHorizontal: PropTypes.bool,
+    center: PropTypes.bool
+};
+
 const StyledButton = Styled.TouchableOpacity`
     ${props => {
-        switch (props.type) {
-            case 'primary':
-                return `
+    switch (props.type) {
+        case 'primary':
+            return `
+                    width: 200px;
+                    height: 50px;
                     border-radius: 3;
                     padding-horizontal: 10;
                     padding-vertical: 5;
                     border-width: 2;
                     border-style: solid;
-                    border-color: ${props.color};
-                    background-color: ${props.color};
+                    border-color: ${props.disabled ? colors.lightGrey : props.color};
+                    background-color: ${props.disabled ? colors.lightGrey : props.color};
                     align-items: center;
+                    justify-content: center;
                     margin: 5px;
                 `;
-            case 'secondary':
-                return `
+        case 'secondary':
+            return `
+                    width: 200px;
+                    height: 50px;
                     border-radius: 3;
                     padding-horizontal: 5;
                     padding-vertical: 5;
                     border-width: 2;
                     border-style: solid;
-                    border-color: ${props.color};
+                    border-color: ${props.disabled ? colors.lightGrey : props.color};
                     align-items: center;
+                    justify-content: center;
                     margin: 5px;
                 `
-        }
-    }}
+    }
+}}
 `;
 
 export const Button = (props) => {
-    const {onPress, type, color, children, style} = props;
+    const {type, color, children} = props;
 
     return (
-        <StyledButton color={color} type={type} onPress={onPress} style={style}>
+        <StyledButton {...props}>
             <Text style={{color: type === 'primary' ? '#fff' : color}}>{children}</Text>
         </StyledButton>
     )
@@ -122,7 +133,12 @@ export class TextInput extends React.Component {
     };
 
     onFocus = () => {
-        this.setState({focusStyling: {borderBottomColor: colors.secondary.regular, borderBottomWidth: 2, ...this.props.style}})
+        this.setState({
+            focusStyling: {
+                borderBottomColor: colors.secondary.regular,
+                borderBottomWidth: 2, ...this.props.style
+            }
+        })
     };
 
     onBlur = () => {

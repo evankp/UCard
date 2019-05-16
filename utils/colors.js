@@ -15,4 +15,5 @@ export const lightGrey = '#eaeaea';
 export const grey = '#ababab';
 export const metaText = '#b1b1b1';
 
+export const positive = '#11e900';
 export const negative = '#ff836d';

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, View} from "react-native";
+import {Text, View, Switch} from "react-native";
 import {connect} from 'react-redux';
 
 import {Button, ScreenContainer, CardBox, TextInput} from '../styles/common-styles'
@@ -13,8 +13,10 @@ class DeckScreen extends React.Component {
     state = {
         dialogVisible: false,
         newQuestion: {
+            key: generateID(),
             title: '',
-            answer: ''
+            answer: '',
+            correct: true
         }
     };
 
@@ -35,8 +37,8 @@ class DeckScreen extends React.Component {
         this.props.dispatch(addCard(this.props.deck.id, card));
 
         modifyDeck({
-           ...this.props.deck,
-           cards: [...this.props.deck.cards, card]
+            ...this.props.deck,
+            cards: [...this.props.deck.cards, card]
         });
 
         this.setState({
@@ -58,12 +60,21 @@ class DeckScreen extends React.Component {
                     <Text style={{fontSize: 50}}>{title}</Text>
                     <Text style={{fontSize: 20, marginBottom: 30}}>{numCards} Cards</Text>
                     <View style={{flexDirection: 'row', marginBottom: 10}}>
-                        <Button onPress={() => this.setState({dialogVisible: true})} type="secondary" color={colors.grey}
+                        <Button onPress={() => this.setState({dialogVisible: true})} type="secondary"
+                                color={colors.grey}
                                 style={{width: 100}}>
                             Add Card
                         </Button>
-                        <Button onPress={() => console.log('Start Pressed')} type="primary" color={colors.main.regular}
-                                style={{width: 100}}>
+                        <Button onPress={() => this.props.navigation.navigate('Question', {
+                            deck: this.props.deck,
+                            question: {
+                                number: 1,
+                                key: this.props.deck.cards[0].key
+                            },
+                            showAnswer: false
+                        })}
+                                type="primary" color={colors.main.regular}
+                                style={{width: 100}} disabled={this.props.deck.cards.length === 0}>
                             Start
                         </Button>
                     </View>
@@ -79,26 +90,37 @@ class DeckScreen extends React.Component {
                     visible={this.state.dialogVisible}>
                     <View>
                         <TextInput
-                        placeholder="Question"
-                        value={this.state.newQuestion.title}
-                        onChangeText={value => this.setState(state => ({
-                            newQuestion: {
-                                ...state.newQuestion,
-                                title: value
-                            }
-                        }))}
-                    />
+                            placeholder="Question"
+                            value={this.state.newQuestion.title}
+                            onChangeText={value => this.setState(state => ({
+                                newQuestion: {
+                                    ...state.newQuestion,
+                                    title: value
+                                }
+                            }))}
+                        />
 
-                    <TextInput
-                        placeholder="Answer"
-                        value={this.state.newQuestion.answer}
-                        onChangeText={value => this.setState(state => ({
-                            newQuestion: {
-                                ...state.newQuestion,
-                                answer: value
-                            }
-                        }))}
-                    />
+                        <TextInput
+                            placeholder="Answer"
+                            value={this.state.newQuestion.answer}
+                            onChangeText={value => this.setState(state => ({
+                                newQuestion: {
+                                    ...state.newQuestion,
+                                    answer: value
+                                }
+                            }))}
+                            style={{marginBottom: 20}}
+                        />
+                        <View style={{width: 120, flexDirection: 'row'}}>
+                            <Text>Correct?</Text>
+                            <Switch value={this.state.newQuestion.correct}
+                                    onValueChange={() => this.setState(state => ({
+                                        newQuestion: {
+                                            ...state.newQuestion,
+                                            correct: !state.newQuestion.correct
+                                        }
+                                    }))}/>
+                        </View>
                     </View>
                 </MaterialDialog>
             </ScreenContainer>

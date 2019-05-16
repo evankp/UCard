@@ -15,28 +15,8 @@ class AddDeckScreen extends React.Component {
 
     state = {
         id: generateID(),
-        cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}],
+        cards: [],
         title: ''
-    };
-
-    deleteCard = key => {
-        this.setState(state => ({
-            cards: state.cards.filter(card => card.key !== key)
-        }))
-    };
-
-    addCard = () => {
-        this.setState(state => ({
-            cards: [...state.cards, {key: generateID(), title: '', answer: ''}]
-        }))
-    };
-
-    editCard = (index, key, value) => {
-        this.setState(state => {
-            return ({
-                cards: state.cards.map((card, i) => i === index ? {...card, [key]: value} : card)
-            })
-        })
     };
 
     submitDeck = () => {
@@ -46,7 +26,7 @@ class AddDeckScreen extends React.Component {
         // Reset screen to get ready for another deck to be added if needed
         this.setState({
             id: generateID(),
-            cards: [{key: generateID(), title: '', answer: ''}, {key: generateID(), title: '', answer: ''}],
+            cards: [],
             title: ''
         });
 
@@ -55,14 +35,9 @@ class AddDeckScreen extends React.Component {
     };
 
     render() {
-        const cardFunctions = {
-            deleteCard: this.deleteCard,
-            addCard: this.addCard,
-            editCard: this.editCard
-        };
 
         return (
-            <ScreenContainer centerHorizontal>
+            <ScreenContainer center>
                 <CardBox>
                     <Heading type="h2">Deck Info</Heading>
                     <TextInput placeholder="Deck title, subject, etc."
@@ -72,14 +47,8 @@ class AddDeckScreen extends React.Component {
                                }))}
                                style={{marginBottom: 20}}
                     />
-                    <Button onPress={() => this.addCard()}
-                            type="tertiary"
-                            color={colors.main.regular}>
-                        Add Card
-                    </Button>
                 </CardBox>
 
-                <CardList cards={this.state.cards} {...cardFunctions}/>
                 <Button onPress={this.submitDeck} type="primary" color={colors.main.regular}>
                     Add Deck
                 </Button>
