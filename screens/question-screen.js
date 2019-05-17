@@ -12,8 +12,40 @@ class QuestionScreen extends React.Component {
         }
     };
 
+    state = {
+        correctGuesses: 0
+    };
+
+    submitGuess = (guess) => {
+        // TODO: Add Toast to let user know result of guess.
+        const {navigation} = this.props;
+        let params = navigation.state.params;
+
+        // If correct increase correct count
+        if (guess === this.props.question.correct) {
+            this.setState(state => ({
+                correctGuesses: state.correctGuesses + 1
+            }))
+        }
+
+        // IF last card navigate to results screen and reset this screen's state
+        // ELSE increase correct count and get new question data
+        if (params.question.number === this.props.deck.cards.length) {
+            navigation.navigate('QuizResults', {correct: this.state.correctGuesses, deck: this.props.deck});
+            this.setState({correctGuesses: 0})
+        } else {
+            navigation.setParams({
+                question: {
+                    number: params.question.number + 1,
+                    key: params.deck.cards[params.question.number].key
+                }
+            })
+        }
+    };
+
     render() {
         const {navigation} = this.props;
+
         return (
             <ScreenContainer center>
                 <CardBox>
@@ -25,12 +57,12 @@ class QuestionScreen extends React.Component {
                                 type="tertiary" color={colors.main.regular} style={{marginBottom: 10}}>
                             {navigation.state.params.showAnswer ? 'Show Question' : 'Show Answer'}
                         </Button>
-                        <Button onPress={() => console.log('correct pressed')}
+                        <Button onPress={() => this.submitGuess(true)}
                                 type="secondary" color={colors.positive}>
                             Correct
                         </Button>
 
-                        <Button onPress={() => console.log('negative pressed')}
+                        <Button onPress={() => this.submitGuess(false)}
                                 type="secondary" color={colors.negative}>
                             Incorrect
                         </Button>

@@ -2,11 +2,12 @@ import React from 'react'
 import {Text} from "react-native";
 import {connect} from 'react-redux'
 
-import {ScreenContainer} from '../styles/common-styles'
+import {Button, ScreenContainer} from '../styles/common-styles'
 import Styled from 'styled-components/native'
 import DeckItem from '../components/deck-item'
 import {clearStorage, getDeckList} from '../utils/async-storage'
-import {initDecks} from "../redux/actions";
+import {clearDecks, initDecks} from "../redux/actions";
+import * as colors from '../utils/colors'
 
 const DeckList = Styled.FlatList`
     width: 100%
@@ -20,6 +21,12 @@ class HomeScreen extends React.Component {
     componentDidMount() {
         getDeckList()
             .then(decks => this.props.dispatch(initDecks(decks)))
+    };
+
+    clearDecks = () => {
+        this.props.dispatch(clearDecks());
+        clearStorage()
+            .catch(err => console.log(err))
     };
 
     render() {
@@ -38,6 +45,7 @@ class HomeScreen extends React.Component {
                 {!decks && (
                     <Text>No Decks</Text>
                 )}
+                <Button onPress={this.clearDecks} color={colors.main.regular} type="tertiary" style={{marginTop: 40}}>Clear Decks</Button>
             </ScreenContainer>
         )
     }

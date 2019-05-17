@@ -4,7 +4,8 @@ import {createAppContainer, createStackNavigator} from 'react-navigation';
 import MainTabNavigator from './MainTabNavigator';
 import DeckScreen from "../screens/deck-screen";
 import * as colors from '../utils/colors'
-import QuestionScreen from "../screens/QuestionScreen";
+import QuestionScreen from "../screens/question-screen";
+import QuizResults from '../screens/quiz-results'
 
 const AppContainer = createAppContainer(createStackNavigator({
     Main: {
@@ -21,6 +22,9 @@ const AppContainer = createAppContainer(createStackNavigator({
     },
     Question: {
         screen: QuestionScreen
+    },
+    QuizResults: {
+        screen: QuizResults
     }
 }, {
     defaultNavigationOptions: {

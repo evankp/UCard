@@ -4,6 +4,7 @@ export const ADD_DECK = 'ADD_DECK';
 export const REMOVE_DECK = 'REMOVE_DECK';
 export const ADD_CARD = 'ADD_CARD';
 export const INIT_DECKS = 'INIT_DECKS';
+export const CLEAR_DECKS = 'CLEAR_DECKS';
 
 export function addDeck(deck) {
     return {
@@ -31,6 +32,12 @@ export function addCard(id, card) {
         type: ADD_CARD,
         id,
         card
+    }
+}
+
+export function clearDecks() {
+    return {
+        type: CLEAR_DECKS
     }
 }
 

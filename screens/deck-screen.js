@@ -31,7 +31,8 @@ class DeckScreen extends React.Component {
         let card = {
             key: generateID(),
             title: this.state.newQuestion.title,
-            answer: this.state.newQuestion.answer
+            answer: this.state.newQuestion.answer,
+            correct: this.state.newQuestion.correct
         };
 
         this.props.dispatch(addCard(this.props.deck.id, card));
@@ -44,8 +45,10 @@ class DeckScreen extends React.Component {
         this.setState({
             dialogVisible: false,
             newQuestion: {
+                key: generateID(),
                 title: '',
-                answer: ''
+                answer: '',
+                correct: true
             }
         })
     };

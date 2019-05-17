@@ -1,8 +1,8 @@
-import {ADD_CARD, ADD_DECK, INIT_DECKS, REMOVE_DECK} from "../actions";
+import {ADD_CARD, ADD_DECK, CLEAR_DECKS, INIT_DECKS, REMOVE_DECK} from "../actions";
 
 import {omit} from 'lodash'
 
-export default function decks(state = {}, action) {
+export default function decks(state, action) {
     switch (action.type) {
         case INIT_DECKS:
             return action.decks;
@@ -28,6 +28,9 @@ export default function decks(state = {}, action) {
                     cards: [...deck.cards, action.card]
                 }
             };
+
+        case CLEAR_DECKS:
+            return state = undefined;
 
         default:
             return state
