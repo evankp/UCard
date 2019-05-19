@@ -1,5 +1,6 @@
 import {ADD_CARD, ADD_DECK, CLEAR_DECKS, INIT_DECKS, REMOVE_DECK} from "../actions";
 
+// Used to remove a deck from state, action: REMOVE_DECK
 import {omit} from 'lodash'
 
 export default function decks(state, action) {

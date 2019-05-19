@@ -1,14 +1,13 @@
-import React from 'react'
-import {Platform} from 'react-native'
-import {createStackNavigator, createMaterialTopTabNavigator, createBottomTabNavigator} from 'react-navigation'
-import * as colors from '../utils/colors'
-import {Icon} from 'expo'
+import React from 'react';
+import {Platform} from 'react-native';
+import {createStackNavigator, createMaterialTopTabNavigator, createBottomTabNavigator} from 'react-navigation';
+import * as colors from '../utils/colors';
+import {Icon} from 'expo';
 
-import TabBarIcon from '../components/TabBarIcon'
-import HomeScreen from '../screens/home-screen'
-import AddDeckScreen from '../screens/add-deck-screen'
-import Colors from '../constants/Colors'
-import DeckScreen from "../screens/deck-screen";
+import TabBarIcon from '../components/TabBarIcon';
+import HomeScreen from '../screens/home-screen';
+import AddDeckScreen from '../screens/add-deck-screen';
+import Colors from '../constants/Colors';
 
 const HomeStack = createStackNavigator({
     Home: HomeScreen,

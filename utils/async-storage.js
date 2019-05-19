@@ -1,15 +1,6 @@
-import {AsyncStorage} from 'react-native'
+import {AsyncStorage} from 'react-native';
 
 const DECK_KEY = 'UCard:deck';
-
-export function getDeck(id) {
-    return AsyncStorage.getItem(DECK_KEY)
-        .then(res => {
-            const data = JSON.parse(res);
-
-            return data[id]
-        })
-}
 
 export async function getDeckList() {
     return AsyncStorage.getItem(DECK_KEY)

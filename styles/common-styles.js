@@ -1,8 +1,8 @@
-import React from 'react'
-import {Text, View, TouchableOpacity} from 'react-native'
-import Styled from 'styled-components/native'
-import * as colors from '../utils/colors'
-import PropTypes from 'prop-types'
+import React from 'react';
+import {Text} from 'react-native';
+import Styled from 'styled-components/native';
+import * as colors from '../utils/colors';
+import PropTypes from 'prop-types';
 
 export const Container = Styled.View`
     flex-grow: 1;
@@ -20,8 +20,8 @@ export const CardBox = Styled.View`
 export const ScreenContainer = Styled.View`
     flex-grow: 1;
     padding: 20px;
-    ${props => props.centerHorizontal ? 'align-items: center;' : ''}
-    ${props => props.center ? 'align-items: center; justify-content: center; ' : ''}
+    ${props => props.centerHorizontal ? 'align-items: center;' : ''};
+    ${props => props.center ? 'align-items: center; justify-content: center; ' : ''};
     background-color: ${colors.lightGrey};
 `;
 
@@ -86,6 +86,7 @@ Button.propTypes = {
 
 export const Heading = Styled.Text`
     margin-bottom: 10px;
+    text-align: center;
     font-size: ${props => {
     switch (props.type) {
         case 'h1':

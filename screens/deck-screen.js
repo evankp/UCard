@@ -1,14 +1,14 @@
-import React from 'react'
-import {Text, View, Switch} from "react-native";
+import React from 'react';
+import {Text, View, Switch} from 'react-native';
 import {connect} from 'react-redux';
 
-import {Button, ScreenContainer, CardBox, TextInput} from '../styles/common-styles'
-import * as colors from '../utils/colors'
-import {addCard, deleteDeck} from "../redux/actions";
-import {MaterialDialog} from "react-native-material-dialog";
-import {generateID} from "../utils/helpers";
-import {modifyDeck} from "../utils/async-storage";
-import {HeaderBackButton} from "react-navigation";
+import {Button, ScreenContainer, CardBox, TextInput} from '../styles/common-styles';
+import * as colors from '../utils/colors';
+import {addCard, deleteDeck} from '../redux/actions';
+import {MaterialDialog} from 'react-native-material-dialog';
+import {generateID} from '../utils/helpers';
+import {modifyDeck} from '../utils/async-storage';
+import {HeaderBackButton} from 'react-navigation';
 
 class DeckScreen extends React.Component {
     static navigationOptions = ({navigation}) => {

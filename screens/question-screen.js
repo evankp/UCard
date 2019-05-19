@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Text, View, BackHandler} from "react-native";
+import {View} from 'react-native';
 import Toast from 'react-native-easy-toast';
 
-import {ScreenContainer, CardBox, Button} from "../styles/common-styles";
+import {ScreenContainer, CardBox, Button, Heading} from '../styles/common-styles';
 import * as colors from '../utils/colors';
 
 class QuestionScreen extends React.Component {
@@ -18,14 +18,9 @@ class QuestionScreen extends React.Component {
         this.toast = React.createRef()
     }
 
-    state = {
-        correctGuesses: 0
-    };
-
     correctGuesses = 0;
 
     submitGuess = (guess) => {
-        // TODO: Add Toast to let user know result of guess.
         const {navigation} = this.props;
         let params = navigation.state.params;
 
@@ -33,6 +28,8 @@ class QuestionScreen extends React.Component {
         if (guess === this.props.question.correct) {
             this.toast.current.show('Correct');
             this.correctGuesses += 1
+        } else {
+            this.toast.current.show('Incorrect')
         }
 
         // IF last card navigate to results screen and reset this screen's state
@@ -56,19 +53,22 @@ class QuestionScreen extends React.Component {
         return (
             <ScreenContainer center>
                 <CardBox>
-                    <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 20}}>
+                    {/* The Question, or answer depending if the users presses the "show answer button" */}
+                    <Heading type="h1">
                         {navigation.state.params.showAnswer ? this.props.question.answer : this.props.question.title}
-                    </Text>
+                    </Heading>
                     <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        {/* Show answer button */}
                         <Button onPress={() => navigation.setParams({showAnswer: !navigation.state.params.showAnswer})}
                                 type="tertiary" color={colors.main.regular} style={{marginBottom: 10}}>
                             {navigation.state.params.showAnswer ? 'Show Question' : 'Show Answer'}
                         </Button>
+                        {/* Correct guess button */}
                         <Button onPress={() => this.submitGuess(true)}
                                 type="secondary" color={colors.positive}>
                             Correct
                         </Button>
-
+                        {/* Incorrect guess button */}
                         <Button onPress={() => this.submitGuess(false)}
                                 type="secondary" color={colors.negative}>
                             Incorrect
@@ -82,7 +82,7 @@ class QuestionScreen extends React.Component {
 }
 
 function mapStateToProps(decks, ownProps) {
-    let deck = decks[ownProps.navigation.state.params.deck.id];
+    const deck = decks[ownProps.navigation.state.params.deck.id];
     return {
         deck,
         question: deck.cards.find(card => card.key === ownProps.navigation.state.params.question.key)

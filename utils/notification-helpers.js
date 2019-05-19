@@ -24,6 +24,7 @@ export function clearLocalNotification() {
         .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
+// Used to test notifications
 export function sendNotification(notificationContent) {
     return Permissions.askAsync(Permissions.NOTIFICATIONS)
         .then(({status}) => {

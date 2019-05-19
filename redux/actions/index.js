@@ -1,4 +1,4 @@
-import * as AsyncStorage from "../../utils/async-storage";
+import * as AsyncStorage from '../../utils/async-storage';
 
 export const ADD_DECK = 'ADD_DECK';
 export const REMOVE_DECK = 'REMOVE_DECK';

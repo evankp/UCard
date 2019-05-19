@@ -1,10 +1,10 @@
-import React from 'react'
-import {ScreenContainer, Heading, TextInput, CardBox, Button} from '../styles/common-styles'
-import {connect} from 'react-redux'
+import React from 'react';
+import {ScreenContainer, Heading, TextInput, CardBox, Button} from '../styles/common-styles';
+import {connect} from 'react-redux';
 
-import * as colors from '../utils/colors'
-import {generateID} from '../utils/helpers'
-import {submitDeck} from "../redux/actions";
+import * as colors from '../utils/colors';
+import {generateID} from '../utils/helpers';
+import {submitDeck} from '../redux/actions';
 
 class AddDeckScreen extends React.Component {
     static navigationOptions = {

@@ -1,6 +1,6 @@
-import React from 'react'
-import {Platform, View, TouchableOpacity, TouchableNativeFeedback} from 'react-native'
-import PropTypes from 'prop-types'
+import React from 'react';
+import {Platform, TouchableOpacity, TouchableNativeFeedback} from 'react-native';
+import PropTypes from 'prop-types';
 
 export default function WithTouchable(props) {
     if (Platform.OS === 'ios') {

@@ -1,16 +1,16 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {BackHandler, Text, View} from "react-native";
-import {HeaderBackButton} from "react-navigation";
+import {BackHandler, Text} from 'react-native';
+import {HeaderBackButton} from 'react-navigation';
 import Toast from 'react-native-easy-toast';
 
-import * as colors from '../utils/colors'
-import {ScreenContainer, CardBox, Button} from "../styles/common-styles";
-import {clearLocalNotification, setLocalNotification} from "../utils/notification-helpers";
+import * as colors from '../utils/colors';
+import {ScreenContainer, CardBox, Button, Heading} from '../styles/common-styles';
+import {clearLocalNotification, setLocalNotification} from '../utils/notification-helpers';
 
 class QuizResults extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
+            title: 'Quiz Results',
             headerLeft: <HeaderBackButton onPress={() => navigation.navigate('Deck', {id: navigation.state.params.deck.id})}
                                           tintColor={colors.white}/>
         }
@@ -44,8 +44,7 @@ class QuizResults extends React.Component {
         return (
             <ScreenContainer center>
                 <CardBox style={{alignItems: 'center'}}>
-                    {/* TODO: Test*/}
-                    <Text style={{fontSize: 30, fontWeight: 'bold'}}>Questions Correct</Text>
+                    <Heading type="h1">Questions Correct</Heading>
                     <Text style={{fontSize: 20, marginBottom: 20}}>{correct} correct</Text>
 
                     <Button onPress={() => navigate('Question', {

@@ -1,14 +1,14 @@
-import React from 'react'
-import {Text} from "react-native";
-import {connect} from 'react-redux'
+import React from 'react';
+import {Text} from 'react-native';
+import {connect} from 'react-redux';
 
-import {Button, ScreenContainer} from '../styles/common-styles'
-import Styled from 'styled-components/native'
-import DeckItem from '../components/deck-item'
-import {clearStorage, getDeckList} from '../utils/async-storage'
-import {clearDecks, initDecks} from "../redux/actions";
-import * as colors from '../utils/colors'
-import {sendNotification, setLocalNotification} from "../utils/notification-helpers";
+import {Button, ScreenContainer} from '../styles/common-styles';
+import Styled from 'styled-components/native';
+import DeckItem from '../components/deck-item';
+import {clearStorage, getDeckList} from '../utils/async-storage';
+import {clearDecks, initDecks} from '../redux/actions';
+import * as colors from '../utils/colors';
+import {setLocalNotification} from '../utils/notification-helpers';
 
 const DeckList = Styled.FlatList`
     width: 100%
