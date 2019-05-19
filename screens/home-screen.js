@@ -8,6 +8,7 @@ import DeckItem from '../components/deck-item'
 import {clearStorage, getDeckList} from '../utils/async-storage'
 import {clearDecks, initDecks} from "../redux/actions";
 import * as colors from '../utils/colors'
+import {sendNotification, setLocalNotification} from "../utils/notification-helpers";
 
 const DeckList = Styled.FlatList`
     width: 100%
@@ -20,7 +21,14 @@ class HomeScreen extends React.Component {
 
     componentDidMount() {
         getDeckList()
-            .then(decks => this.props.dispatch(initDecks(decks)))
+            .then(decks => {
+                this.props.dispatch(initDecks(decks));
+
+                // Only set local notifications if there is a deck
+                if (decks) {
+                    setLocalNotification()
+                }
+            });
     };
 
     clearDecks = () => {

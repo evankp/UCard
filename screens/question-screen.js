@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Text, View} from "react-native";
+import {Text, View, BackHandler} from "react-native";
+import Toast from 'react-native-easy-toast';
 
 import {ScreenContainer, CardBox, Button} from "../styles/common-styles";
 import * as colors from '../utils/colors';
@@ -12,9 +13,16 @@ class QuestionScreen extends React.Component {
         }
     };
 
+    constructor(props) {
+        super(props);
+        this.toast = React.createRef()
+    }
+
     state = {
         correctGuesses: 0
     };
+
+    correctGuesses = 0;
 
     submitGuess = (guess) => {
         // TODO: Add Toast to let user know result of guess.
@@ -23,16 +31,15 @@ class QuestionScreen extends React.Component {
 
         // If correct increase correct count
         if (guess === this.props.question.correct) {
-            this.setState(state => ({
-                correctGuesses: state.correctGuesses + 1
-            }))
+            this.toast.current.show('Correct');
+            this.correctGuesses += 1
         }
 
         // IF last card navigate to results screen and reset this screen's state
         // ELSE increase correct count and get new question data
         if (params.question.number === this.props.deck.cards.length) {
-            navigation.navigate('QuizResults', {correct: this.state.correctGuesses, deck: this.props.deck});
-            this.setState({correctGuesses: 0})
+            navigation.navigate('QuizResults', {correct: this.correctGuesses, deck: this.props.deck});
+            this.correctGuesses = 0
         } else {
             navigation.setParams({
                 question: {
@@ -68,6 +75,7 @@ class QuestionScreen extends React.Component {
                         </Button>
                     </View>
                 </CardBox>
+                <Toast ref={this.toast} positionValue={150} opacity={0.5}/>
             </ScreenContainer>
         )
     }

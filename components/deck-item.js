@@ -25,7 +25,7 @@ export default class DeckItem extends React.Component {
         const numCards = this.props.deck.cards.length;
 
         return (
-            <WithTouchable onPress={() => this.props.navigate('Deck', {id, title})}>
+            <WithTouchable onPress={() => this.props.navigate('Deck', {id})}>
                 <Deck>
                     <Heading type='h3'>{title}</Heading>
                     <Heading>{numCards} Cards</Heading>

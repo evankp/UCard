@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 
 import * as colors from '../utils/colors'
 import {generateID} from '../utils/helpers'
-import CardList from '../components/card-list'
-import {addDeck, clearStorage} from "../utils/async-storage";
 import {submitDeck} from "../redux/actions";
 
 class AddDeckScreen extends React.Component {
@@ -23,6 +21,9 @@ class AddDeckScreen extends React.Component {
         // Add deck to store
         this.props.dispatch(submitDeck(this.state));
 
+        // Separate id from state for later
+        const newDeckId = this.state.id;
+
         // Reset screen to get ready for another deck to be added if needed
         this.setState({
             id: generateID(),
@@ -30,8 +31,8 @@ class AddDeckScreen extends React.Component {
             title: ''
         });
 
-        // Navigate to home screen
-        this.props.navigation.navigate('Home', {refresh: false})
+        // Navigate to the new deck screen
+        this.props.navigation.navigate('Deck', {id: newDeckId})
     };
 
     render() {
@@ -40,6 +41,7 @@ class AddDeckScreen extends React.Component {
             <ScreenContainer center>
                 <CardBox>
                     <Heading type="h2">Deck Info</Heading>
+                    {/* Deck title text input */}
                     <TextInput placeholder="Deck title, subject, etc."
                                value={this.state.title}
                                onChangeText={value => this.setState(() => ({

@@ -8,8 +8,16 @@ import {addCard, deleteDeck} from "../redux/actions";
 import {MaterialDialog} from "react-native-material-dialog";
 import {generateID} from "../utils/helpers";
 import {modifyDeck} from "../utils/async-storage";
+import {HeaderBackButton} from "react-navigation";
 
 class DeckScreen extends React.Component {
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerLeft: <HeaderBackButton onPress={() => navigation.navigate('Home')}
+                                          tintColor={colors.white}/>
+        }
+    };
+
     state = {
         dialogVisible: false,
         newQuestion: {
@@ -35,13 +43,16 @@ class DeckScreen extends React.Component {
             correct: this.state.newQuestion.correct
         };
 
+        // Add to Redux
         this.props.dispatch(addCard(this.props.deck.id, card));
 
+        // Add to localstorage
         modifyDeck({
             ...this.props.deck,
             cards: [...this.props.deck.cards, card]
         });
 
+        // clear state
         this.setState({
             dialogVisible: false,
             newQuestion: {
@@ -60,14 +71,19 @@ class DeckScreen extends React.Component {
         return (
             <ScreenContainer center>
                 <CardBox style={{alignItems: 'center', justifyContent: 'center'}}>
+                    {/* Deck Info */}
                     <Text style={{fontSize: 50}}>{title}</Text>
                     <Text style={{fontSize: 20, marginBottom: 30}}>{numCards} Cards</Text>
+                    {/* Button Row */}
                     <View style={{flexDirection: 'row', marginBottom: 10}}>
+                        {/* Add card button */}
                         <Button onPress={() => this.setState({dialogVisible: true})} type="secondary"
                                 color={colors.grey}
                                 style={{width: 100}}>
                             Add Card
                         </Button>
+
+                        {/* Start quiz button */}
                         <Button onPress={() => this.props.navigation.navigate('Question', {
                             deck: this.props.deck,
                             question: {
@@ -77,13 +93,15 @@ class DeckScreen extends React.Component {
                             showAnswer: false
                         })}
                                 type="primary" color={colors.main.regular}
-                                style={{width: 100}} disabled={this.props.deck.cards.length === 0}>
+                                style={{width: 100}} disabled={numCards === 0}>
                             Start
                         </Button>
                     </View>
+                    {/* Delete Button */}
                     <Button onPress={this.deleteDeck} type="tertiary" color={colors.negative}>Delete</Button>
                 </CardBox>
 
+                {/* Dialog popup for new question */}
                 <MaterialDialog
                     title="Add Card"
                     okLabel="SAVE"
@@ -92,6 +110,7 @@ class DeckScreen extends React.Component {
                     onCancel={() => this.setState({dialogVisible: false})}
                     visible={this.state.dialogVisible}>
                     <View>
+                        {/* Question text input */}
                         <TextInput
                             placeholder="Question"
                             value={this.state.newQuestion.title}
@@ -103,6 +122,7 @@ class DeckScreen extends React.Component {
                             }))}
                         />
 
+                        {/* Answer text input */}
                         <TextInput
                             placeholder="Answer"
                             value={this.state.newQuestion.answer}
@@ -114,8 +134,12 @@ class DeckScreen extends React.Component {
                             }))}
                             style={{marginBottom: 20}}
                         />
+
+                        {/* How does the app know if, when the user presses correct/incorrect, that the answer the user
+                        provided is correct? Therefore, let the user tell the app which button should count as "correct"
+                         guess. */}
                         <View style={{width: 120, flexDirection: 'row'}}>
-                            <Text>Correct?</Text>
+                            <Text>Is the answer a "Yes/Correct"?</Text>
                             <Switch value={this.state.newQuestion.correct}
                                     onValueChange={() => this.setState(state => ({
                                         newQuestion: {
