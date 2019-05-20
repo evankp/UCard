@@ -32,7 +32,7 @@ class DeckScreen extends React.Component {
         const {id} = this.props.deck;
 
         this.props.dispatch(deleteDeck(id));
-        this.props.navigation.goBack()
+        this.props.navigation.navigate('Home');
     };
 
     submitNewQuestion = () => {

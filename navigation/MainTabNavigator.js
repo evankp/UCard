@@ -25,12 +25,7 @@ HomeStack.navigationOptions = {
             style={{marginBottom: -3}}
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
         />
-    ),
-    tabBarOptions: {
-        activeTintColor: colors.secondary.regular,
-        inactiveTintColor: colors.white,
-    }
-
+    )
 };
 
 const AddDeckStack = createStackNavigator({
@@ -51,11 +46,7 @@ AddDeckStack.navigationOptions = {
             color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
 
         />
-    ),
-    tabBarOptions: {
-        activeTintColor: colors.secondary.regular,
-        inactiveTintColor: colors.white,
-    }
+    )
 };
 
 let tabNavigator;
@@ -67,6 +58,8 @@ const screens = {
 
 const options = {
     tabBarOptions: {
+        activeTintColor: colors.secondary.regular,
+        inactiveTintColor: colors.grey,
         style: {
             backgroundColor: colors.main.regular
         }
