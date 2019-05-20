@@ -14,6 +14,8 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
     tabBarLabel: 'Deck list',
+    activeTintColor: colors.secondary.regular,
+    inactiveTintColor: colors.white,
     tabBarIcon: ({focused}) => (
         <Icon.Ionicons
             name={
