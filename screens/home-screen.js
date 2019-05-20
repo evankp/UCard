@@ -1,16 +1,16 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 
 import {Button, ScreenContainer} from '../styles/common-styles';
-import Styled from 'styled-components/native';
+import Styled from 'styled-components';
 import DeckItem from '../components/deck-item';
 import {clearStorage, getDeckList} from '../utils/async-storage';
 import {clearDecks, initDecks} from '../redux/actions';
 import * as colors from '../utils/colors';
 import {setLocalNotification} from '../utils/notification-helpers';
 
-const DeckList = Styled.FlatList`
+const DeckList = Styled(FlatList)`
     width: 100%
 `;
 

@@ -1,11 +1,12 @@
 import React from 'react';
+import {View} from "react-native";
 import {Heading} from '../styles/common-styles';
-import Styled from 'styled-components/native';
+import Styled from 'styled-components';
 import WithTouchable from '../components/with-touchable';
 import * as colors from '../utils/colors';
 import PropTypes from 'prop-types';
 
-const Deck = Styled.View`
+const Deck = Styled(View)`
     width: 100%;
     padding: 30px;
     justify-content: center;

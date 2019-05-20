@@ -1,15 +1,15 @@
 import React from 'react';
-import {Text} from 'react-native';
-import Styled from 'styled-components/native';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import Styled from 'styled-components';
 import * as colors from '../utils/colors';
 import PropTypes from 'prop-types';
 
-export const Container = Styled.View`
+export const Container = Styled(View)`
     flex-grow: 1;
     background-color: #fff;
 `;
 
-export const CardBox = Styled.View`
+export const CardBox = Styled(View)`
     background-color: #fff;
     border-radius: 2px;
     padding: 24px;
@@ -17,7 +17,7 @@ export const CardBox = Styled.View`
     width: 350px;
 `;
 
-export const ScreenContainer = Styled.View`
+export const ScreenContainer = Styled(View)`
     flex-grow: 1;
     padding: 20px;
     ${props => props.centerHorizontal ? 'align-items: center;' : ''};
@@ -30,7 +30,7 @@ ScreenContainer.propTypes = {
     center: PropTypes.bool
 };
 
-const StyledButton = Styled.TouchableOpacity`
+const StyledButton = Styled(TouchableOpacity)`
     ${props => {
     switch (props.type) {
         case 'primary':
@@ -84,7 +84,7 @@ Button.propTypes = {
 };
 
 
-export const Heading = Styled.Text`
+export const Heading = Styled(Text)`
     margin-bottom: 10px;
     text-align: center;
     font-size: ${props => {
@@ -107,7 +107,7 @@ Heading.propTypes = {
     type: PropTypes.oneOf(['h1', 'h2', 'h3'])
 };
 
-const StyledTextInput = Styled.TextInput`
+const StyledTextInput = Styled(TextInput)`
     border-bottom-color: black;
     border-bottom-width: 1px;
     font-size: 16px;
@@ -115,7 +115,7 @@ const StyledTextInput = Styled.TextInput`
     padding: 5px 5px 5px 10px;
 `;
 
-export class TextInput extends React.Component {
+export class CustomTextInput extends React.Component {
     static propTypes = {
         placeholder: PropTypes.string,
         value: PropTypes.oneOfType([

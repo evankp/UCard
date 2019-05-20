@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScreenContainer, Heading, TextInput, CardBox, Button} from '../styles/common-styles';
+import {ScreenContainer, Heading, CustomTextInput, CardBox, Button} from '../styles/common-styles';
 import {connect} from 'react-redux';
 
 import * as colors from '../utils/colors';
@@ -42,7 +42,7 @@ class AddDeckScreen extends React.Component {
                 <CardBox>
                     <Heading type="h2">Deck Info</Heading>
                     {/* Deck title text input */}
-                    <TextInput placeholder="Deck title, subject, etc."
+                    <CustomTextInput placeholder="Deck title, subject, etc."
                                value={this.state.title}
                                onChangeText={value => this.setState(() => ({
                                    title: value

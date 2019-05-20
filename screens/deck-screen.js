@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Switch} from 'react-native';
 import {connect} from 'react-redux';
 
-import {Button, ScreenContainer, CardBox, TextInput} from '../styles/common-styles';
+import {Button, ScreenContainer, CardBox, CustomTextInput} from '../styles/common-styles';
 import * as colors from '../utils/colors';
 import {addCard, deleteDeck} from '../redux/actions';
 import {MaterialDialog} from 'react-native-material-dialog';
@@ -111,7 +111,7 @@ class DeckScreen extends React.Component {
                     visible={this.state.dialogVisible}>
                     <View>
                         {/* Question text input */}
-                        <TextInput
+                        <CustomTextInput
                             placeholder="Question"
                             value={this.state.newQuestion.title}
                             onChangeText={value => this.setState(state => ({
@@ -123,7 +123,7 @@ class DeckScreen extends React.Component {
                         />
 
                         {/* Answer text input */}
-                        <TextInput
+                        <CustomTextInput
                             placeholder="Answer"
                             value={this.state.newQuestion.answer}
                             onChangeText={value => this.setState(state => ({
