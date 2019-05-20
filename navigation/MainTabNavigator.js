@@ -4,7 +4,6 @@ import {createStackNavigator, createMaterialTopTabNavigator, createBottomTabNavi
 import * as colors from '../utils/colors';
 import {Icon} from 'expo';
 
-import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/home-screen';
 import AddDeckScreen from '../screens/add-deck-screen';
 import Colors from '../constants/Colors';
@@ -16,13 +15,15 @@ const HomeStack = createStackNavigator({
 HomeStack.navigationOptions = {
     tabBarLabel: 'Deck list',
     tabBarIcon: ({focused}) => (
-        <TabBarIcon
-            focused={focused}
+        <Icon.Ionicons
             name={
                 Platform.OS === 'ios'
                     ? `ios-home`
                     : 'md-home'
             }
+            size={26}
+            style={{marginBottom: -3}}
+            color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
         />
     ),
 };
@@ -42,7 +43,7 @@ AddDeckStack.navigationOptions = {
             }
             size={26}
             style={{marginBottom: -3}}
-            color={this.props.focused ? Colors.tabIconSelected : Colors.tabIconDefault}
+            color={focused ? Colors.tabIconSelected : Colors.tabIconDefault}
 
         />
     ),
