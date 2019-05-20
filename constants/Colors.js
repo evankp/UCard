@@ -1,9 +1,11 @@
+import * as Colors from '../utils/colors';
+
 const tintColor = '#2f95dc';
 
 export default {
   tintColor,
-  tabIconDefault: '#ccc',
-  tabIconSelected: tintColor,
+  tabIconDefault: '#ffffff',
+  tabIconSelected: Colors.secondary.regular,
   tabBar: '#fefefe',
   errorBackground: 'red',
   errorText: '#fff',
