@@ -12,7 +12,7 @@ import {Container} from './styles/common-styles'
 import reducer from './redux/reducers'
 import middleware from './redux/middleware'
 
-const StatusBarBackground = Styled.View`
+const StatusBarBackground = Styled(View)`
     background-color: ${colors.main.dark};
     height: ${Constants.statusBarHeight}
 `
